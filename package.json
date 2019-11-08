@@ -1,9 +1,13 @@
 {
   "name": "gridsome-pitt-blog",
+  "version": "0.0.1",
+  "description": "PittWu's Blog",
+  "author": "Pitt <kgb00128@gmail.com>",
   "private": true,
   "scripts": {
+    "init": "yarn install",
     "build": "gridsome build",
-    "develop": "gridsome develop",
+    "dev": "gridsome develop",
     "explore": "gridsome explore"
   },
   "dependencies": {
