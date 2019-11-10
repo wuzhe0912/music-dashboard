@@ -1,4 +1,3 @@
 <template lang="pug">
-  Layout
-    h1 Demo
+  footer cpyright 2019 by Pitt
 </template>
