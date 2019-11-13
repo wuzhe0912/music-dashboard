@@ -1,4 +1,0 @@
-<template lang="pug">
-  Layout
-    h1 Demo
-</template>

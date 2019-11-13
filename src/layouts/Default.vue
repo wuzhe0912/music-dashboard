@@ -6,9 +6,18 @@
       nav
         g-link.nav__link(to="/") Home
         g-link.nav__link(to="/about/") About
-        g-link.nav__link(to="/demo/") Demo
+        g-link.nav__link(to="/products/") Products
     slot
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+    }
+  }
+}
+</script>
 
 <static-query>
   query {
