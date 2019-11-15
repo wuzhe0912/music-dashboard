@@ -7,7 +7,18 @@
 module.exports = {
   siteName: 'Vue Couture',
   siteDescription: 'Gridsome Blog',
-  plugins: [],
+  plugins: [
+    {
+      use: '@gridsome/source-filesystem',
+      options: {
+        typeName: 'Post',
+        path: 'content/posts/**/*.md',
+      }
+    }
+  ],
+  templates: {
+    Post: '/blog/:year/:month/:day/:slug'
+  },
   chainWebpack: config => {
     config.module
       .rule('pug')
