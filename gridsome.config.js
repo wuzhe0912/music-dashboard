@@ -11,13 +11,13 @@ module.exports = {
     {
       use: '@gridsome/source-filesystem',
       options: {
-        typeName: 'Post',
-        path: 'content/posts/**/*.md',
+        typeName: 'blogPost',
+        path: './content/posts/**/*.md',
       }
     }
   ],
   templates: {
-    Post: '/blog/:year/:month/:day/:slug'
+    blogPost: '/posts/:year/:month/:day/:slug'
   },
   chainWebpack: config => {
     config.module

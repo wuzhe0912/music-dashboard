@@ -1,7 +1,7 @@
 <template lang="pug">
   Layout
     h1 About us
-    p {{ $static.metaData.siteDescription }}
+    p {{ $static.metadata.siteDescription }}
 </template>
 
 <script>
@@ -14,7 +14,7 @@ export default {
 
 <static-query>
   query {
-    metaData {
+    metadata {
       siteDescription
     }
   }
