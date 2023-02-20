@@ -1,0 +1,15 @@
+{
+  "name": "node-example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:wuzhe0912/node-example.git",
+  "author": "Pitt Wu <kgb00128@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
