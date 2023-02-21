@@ -1,10 +1,11 @@
 const http = require('http');
 const { v4: uuidv4 } = require('uuid');
+const errorHandle = require('./components/errorHandle');
 
 const uuid = uuidv4();
 const todos = [];
 
-const requestListener = function (req, res) {
+const requestListener = async (req, res) => {
   const headers = {
     'Access-Control-Allow-Headers':
       'Content-Type, Authorization, Content-Length, X-Requested-With',
@@ -28,12 +29,34 @@ const requestListener = function (req, res) {
     res.end();
   } else if (req.url === '/todos' && req.method === 'POST') {
     req.on('end', () => {
-      const title = JSON.parse(body).title;
-      const item = {
-        id: uuid,
-        title: title,
-      };
-      todos.push(item);
+      try {
+        const title = JSON.parse(body).title;
+        if (title) {
+          const item = {
+            id: uuid,
+            title: title,
+          };
+          todos.push(item);
+          res.writeHead(200, headers);
+          res.write(
+            JSON.stringify({
+              status: 'success',
+              data: todos,
+            }),
+          );
+          res.end();
+        } else {
+          errorHandle(res);
+        }
+      } catch (error) {
+        errorHandle(res);
+      }
+    });
+  } else if (req.url.startsWith('/todos/') && req.method === 'DELETE') {
+    const id = req.url.split('/')[2];
+    const itemIndex = todos.findIndex((todo) => todo.id === id);
+    if (itemIndex !== -1) {
+      todos.splice(itemIndex, 1);
       res.writeHead(200, headers);
       res.write(
         JSON.stringify({
@@ -42,10 +65,18 @@ const requestListener = function (req, res) {
         }),
       );
       res.end();
-    });
-  } else if (req.url === '/' && req.method === 'DELETE') {
+    } else {
+      await errorHandle(res);
+    }
+  } else if (req.url === '/todos' && req.method === 'DELETE') {
+    todos.length = 0;
     res.writeHead(200, headers);
-    res.write('Delete is Success');
+    res.write(
+      JSON.stringify({
+        status: 'success',
+        data: todos,
+      }),
+    );
     res.end();
   } else if (req.method === 'OPTIONS') {
     res.writeHead(200, headers);
